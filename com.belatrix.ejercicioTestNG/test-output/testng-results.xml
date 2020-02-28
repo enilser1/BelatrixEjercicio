@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="47302" started-at="2020-02-28T02:59:14Z" finished-at="2020-02-28T03:00:01Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="47302" started-at="2020-02-28T02:59:14Z" finished-at="2020-02-28T03:00:01Z">
+      <class name="com.belatrix.tests.Test01">
+        <test-method status="PASS" signature="setUpSuite()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="setUpSuite" is-config="true" duration-ms="147" started-at="2020-02-28T02:59:14Z" finished-at="2020-02-28T02:59:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpSuite -->
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="beforeClass" is-config="true" duration-ms="1929" started-at="2020-02-28T02:59:14Z" finished-at="2020-02-28T02:59:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="test(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="test" duration-ms="44796" started-at="2020-02-28T02:59:16Z" data-provider="authenticationData" finished-at="2020-02-28T03:00:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[shoes]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[PUMA]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[10]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="afterClass" is-config="true" duration-ms="541" started-at="2020-02-28T03:00:01Z" finished-at="2020-02-28T03:00:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.belatrix.tests.Test01 -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
