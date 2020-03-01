@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Base {
 
@@ -64,27 +66,21 @@ public class Base {
 	public void moveToElementosByDos(WebElement elemento1,WebElement elemento2) throws InterruptedException{
 		Actions action = new Actions(driver); 
 		action.moveToElement(elemento1).moveToElement(elemento2).click().build().perform();
-		Thread.sleep(2000);
+		
 		
 	}
-	public void moveToElementos(By localizador1){
-		Actions action = new Actions(driver); 
-		action.moveToElement(driver.findElement(localizador1)).click().build().perform();
-		
-	}
+
 	public WebElement findElement(By localizador) {
 		return driver.findElement(localizador);
 	}
 	
-	public WebElement findElementCheckBox(String nombre) {
-		return driver.findElement(By.xpath("//input[@type='checkbox' and @aria-label='"+nombre+"']"));
+
+	
+	public void waitElement(By localizador) {
+		WebDriverWait ewait=new WebDriverWait(driver,10);
+		ewait.until(ExpectedConditions.presenceOfElementLocated(localizador));
 	}
 	
-	public WebElement findElementByTagNameByText(String tagName,String nombre) {
-		return driver.findElement(By.xpath("//"+tagName+"[contains(text(), '"+nombre+"')]"));
-		
-		//return driver.findElement(By.xpath("//"+tagName+"[contains(text(), '"+nombre+"')]"));
-	}
 	
 	
 	public Boolean isDisplayed(By localizador) {

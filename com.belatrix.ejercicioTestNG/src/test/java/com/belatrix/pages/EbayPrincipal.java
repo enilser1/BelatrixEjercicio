@@ -21,12 +21,11 @@ public class EbayPrincipal extends Base {
 	By botonBusqueda = By.id("gh-btn");
 
 	public void ingresarProducto(String nombreproducto) throws InterruptedException {
-
+		waitElement(cajaBusqueda);
 		if (isDisplayed(cajaBusqueda)) {
 			/* Ingresamos el nombre del producto en la caja de texto */
 			sendKeys(nombreproducto, cajaBusqueda);
 		}
-
 	}
 
 	public void elegirCategoria(String nombreCategoria) throws InterruptedException {
@@ -34,13 +33,11 @@ public class EbayPrincipal extends Base {
 	}
 
 	public void buscarProducto() throws InterruptedException {
-
+		waitElement(botonBusqueda);
 		if (isDisplayed(botonBusqueda)) {
 			/* clic en el boton para buscar el producto */
 			click(botonBusqueda);
-
 		}
-
 	}
 
 }

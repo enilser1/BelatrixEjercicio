@@ -30,13 +30,17 @@ public class EbayDetalle extends Base {
 	}
 
 	List<String> writeList = new ArrayList<String>();
+	
+	By checkboxmarcaLocator;
+	By checkboxtamanioLocator;
+	By opcionlistaLocator;
 
 	By resultadosLocator = By.xpath("//h1[@class='srp-controls__count-heading']");
 	By spanresultadoLocator = By.tagName("span");
 	//By botonDropDownLocator = By.xpath("//button[@type='button' and @aria-controls='w9']");
 	//By botonDropDownLocator = By.id("w23-button-w0");
-	By botonDropDownLocator = By.xpath("//div[@class='srp-controls--selected-value']");
-	
+	By botonDropDownLocator1 = By.xpath("//div[@class='srp-controls--selected-value']");
+	By botonDropDownLocator2 = By.xpath("//button[@id='w23-button']");
 	By nombreProductoLocator = (By.xpath("//h3[@class='s-item__title']"));
 	By precioProductoLocator = (By.xpath("//span[@class='s-item__price']"));
 
@@ -52,36 +56,45 @@ public class EbayDetalle extends Base {
 	}
 
 	public void seleccionarMarca(String nombreMarca) throws InterruptedException {
+		checkboxmarcaLocator=By.xpath("//input[@type='checkbox' and @aria-label='"+nombreMarca+"']");
+		waitElement(checkboxmarcaLocator);
+		click(checkboxmarcaLocator);
 
-		WebElement checkboxMarca;
-		checkboxMarca = findElementCheckBox(nombreMarca);
-		click(checkboxMarca);
-		Thread.sleep(2000);
 
 	}
 
 	public void seleccionarTamaño(String tamaño) throws InterruptedException {
+		checkboxtamanioLocator=By.xpath("//input[@type='checkbox' and @aria-label='"+tamaño+"']");
+		waitElement(checkboxtamanioLocator);
+		click(checkboxtamanioLocator);
 
-		WebElement checkboxTamaño;
-		checkboxTamaño = findElementCheckBox(tamaño);
-		click(checkboxTamaño);
-		Thread.sleep(2000);
 	}
 
 	public void obtenernumeroResultados() throws InterruptedException {
+		waitElement(resultadosLocator);
 		WebElement listaresutado = findElement(resultadosLocator);
 		List<WebElement> resultado = findElements(listaresutado, spanresultadoLocator);
 		String textoresultado = getText(resultado.get(0));
 		System.out.println("La cantidad de resultados es: " + textoresultado);
-		Thread.sleep(4000);
+	
 
 	}
 
 	public void ordenarPor(String nombreOrden) throws InterruptedException {
 		
-		WebElement desplegarLista=findElement(botonDropDownLocator);
-		WebElement elegirOpcion = findElementByTagNameByText("span", nombreOrden);
-		moveToElementosByDos(desplegarLista,elegirOpcion);
+		WebElement desplegarLista=null;
+		WebElement elegirOpcion=null;
+		opcionlistaLocator=By.xpath("//span[contains(text(), '"+nombreOrden+"')]");
+		elegirOpcion = findElement(opcionlistaLocator);
+		if(isDisplayed(botonDropDownLocator1))  {
+			desplegarLista=findElement(botonDropDownLocator1);
+			moveToElementosByDos(desplegarLista,elegirOpcion);
+		}else if(isDisplayed(botonDropDownLocator2)) {
+			desplegarLista=findElement(botonDropDownLocator2);
+			click(botonDropDownLocator2);
+			click(elegirOpcion);
+		}		
+		
 
 	}
 
@@ -107,7 +120,6 @@ public class EbayDetalle extends Base {
 		
 		System.out.println("--------------------------------------------------------------------------------------");
 		String contadorString = String.valueOf(contador);
-		Thread.sleep(4000);
 		return contadorString;
 	}
 
@@ -139,13 +151,31 @@ public class EbayDetalle extends Base {
 
 		} else if (concepto.equals("precio")) {
 			if (modo.contains("asc")) {
-				WebElement desplegarLista=findElement(botonDropDownLocator);
-				WebElement elegirOpcion = findElementByTagNameByText("span", "bajo primero");
-				moveToElementosByDos(desplegarLista,elegirOpcion);
+				WebElement desplegarLista=null;
+				WebElement elegirOpcion=null;
+				opcionlistaLocator=By.xpath("//span[contains(text(), 'bajo primero')]");
+				elegirOpcion = findElement(opcionlistaLocator);
+				if(isDisplayed(botonDropDownLocator1))  {
+					desplegarLista=findElement(botonDropDownLocator1);
+					moveToElementosByDos(desplegarLista,elegirOpcion);
+				}else if(isDisplayed(botonDropDownLocator2)) {
+					desplegarLista=findElement(botonDropDownLocator2);
+					click(botonDropDownLocator2);
+					click(elegirOpcion);
+				}
 			} else if (modo.contains("desc")) {
-				WebElement desplegarLista=findElement(botonDropDownLocator);
-				WebElement elegirOpcion = findElementByTagNameByText("span", "alto primero");
-				moveToElementosByDos(desplegarLista,elegirOpcion);
+				WebElement desplegarLista=null;
+				WebElement elegirOpcion=null;
+				opcionlistaLocator=By.xpath("//span[contains(text(), 'alto primero')]");
+				elegirOpcion = findElement(opcionlistaLocator);
+				if(isDisplayed(botonDropDownLocator1))  {
+					desplegarLista=findElement(botonDropDownLocator1);
+					moveToElementosByDos(desplegarLista,elegirOpcion);
+				}else if(isDisplayed(botonDropDownLocator2)) {
+					desplegarLista=findElement(botonDropDownLocator2);
+					click(botonDropDownLocator2);
+					click(elegirOpcion);
+				}
 			}			
 			List<WebElement> nombres = findElements(nombreProductoLocator);
 			List<WebElement> precios = findElements(precioProductoLocator);
