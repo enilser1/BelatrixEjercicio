@@ -25,11 +25,12 @@ public class Base {
 		
 		if (driver == null) {
 			
-			if(System.getProperty("os.name").equals("Windows 10")) {
+			//if(System.getProperty("os.name").equals("Windows 10")) {
 				driverByOS="./src/test/resources/chromedriver/chromedriver.exe";
-			}else {
-				driverByOS="./src/test/resources/otracarpeta/chromedriverLinux.exe";
-			}
+			/*
+			 * }else { driverByOS="./src/test/resources/otracarpeta/chromedriverLinux.exe";
+			 * }
+			 */
 			System.setProperty("webdriver.chrome.driver", driverByOS);
 			/*ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--headless");
