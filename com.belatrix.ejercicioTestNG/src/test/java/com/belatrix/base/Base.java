@@ -33,10 +33,10 @@ public class Base {
 			 * 
 			 */
 			System.setProperty("webdriver.chrome.driver", driverByOS);
-			/*ChromeOptions chromeOptions = new ChromeOptions();
+			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--headless");
-			driver = new ChromeDriver(chromeOptions);*/
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(chromeOptions);
+			//driver = new ChromeDriver();
 			driver.manage().window().maximize();
 
         }
