@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="32951" started-at="2020-02-28T15:46:59Z" finished-at="2020-02-28T15:47:32Z">
+  <suite name="Default suite" duration-ms="28157" started-at="2020-03-02T15:57:16Z" finished-at="2020-03-02T15:57:44Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="32951" started-at="2020-02-28T15:46:59Z" finished-at="2020-02-28T15:47:32Z">
+    <test name="Default test" duration-ms="28157" started-at="2020-03-02T15:57:16Z" finished-at="2020-03-02T15:57:44Z">
       <class name="com.belatrix.tests.Test01">
-        <test-method status="PASS" signature="setUpSuite()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="setUpSuite" is-config="true" duration-ms="159" started-at="2020-02-28T15:46:59Z" finished-at="2020-02-28T15:46:59Z">
+        <test-method status="PASS" signature="setUpSuite()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="setUpSuite" is-config="true" duration-ms="169" started-at="2020-03-02T15:57:15Z" finished-at="2020-03-02T15:57:16Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpSuite -->
-        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="beforeClass" is-config="true" duration-ms="2284" started-at="2020-02-28T15:46:59Z" finished-at="2020-02-28T15:47:01Z">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="beforeClass" is-config="true" duration-ms="1618" started-at="2020-03-02T15:57:16Z" finished-at="2020-03-02T15:57:17Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method status="PASS" signature="test(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="test" duration-ms="29542" started-at="2020-02-28T15:47:01Z" data-provider="authenticationData" finished-at="2020-02-28T15:47:31Z">
+        <test-method status="PASS" signature="test(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="test" duration-ms="25759" started-at="2020-03-02T15:57:17Z" data-provider="authenticationData" finished-at="2020-03-02T15:57:43Z">
           <params>
             <param index="0">
               <value>
@@ -41,7 +41,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="afterClass" is-config="true" duration-ms="1077" started-at="2020-02-28T15:47:31Z" finished-at="2020-02-28T15:47:32Z">
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.belatrix.tests.Test01@71ba6d4e]" name="afterClass" is-config="true" duration-ms="742" started-at="2020-03-02T15:57:43Z" finished-at="2020-03-02T15:57:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
