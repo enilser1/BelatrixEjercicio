@@ -101,6 +101,7 @@ public class Test01 extends Base{
   @AfterClass
   public void afterClass() {
 	  report.flush();
+	  cerrarNavegador();
   }
 
 }

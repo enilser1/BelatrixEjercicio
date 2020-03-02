@@ -121,5 +121,9 @@ public class Base {
 	public String getText(By localizador) {
 		return driver.findElement(localizador).getText();
 	}
+	
+	public void cerrarNavegador() {
+		driver.quit();
+	}
 
 }
