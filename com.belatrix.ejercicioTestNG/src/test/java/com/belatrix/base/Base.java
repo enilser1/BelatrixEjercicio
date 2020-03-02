@@ -30,6 +30,7 @@ public class Base {
 			/*
 			 * }else { driverByOS="./src/test/resources/otracarpeta/chromedriverLinux.exe";
 			 * }
+			 * 
 			 */
 			System.setProperty("webdriver.chrome.driver", driverByOS);
 			/*ChromeOptions chromeOptions = new ChromeOptions();
