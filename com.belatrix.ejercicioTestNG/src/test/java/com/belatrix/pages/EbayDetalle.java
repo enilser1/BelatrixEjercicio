@@ -85,13 +85,18 @@ public class EbayDetalle extends Base {
 		WebElement desplegarLista=null;
 		WebElement elegirOpcion=null;
 		opcionlistaLocator=By.xpath("//span[contains(text(), '"+nombreOrden+"')]");
-		elegirOpcion = findElement(opcionlistaLocator);
+		
+		
 		if(isDisplayed(botonDropDownLocator1))  {
 			desplegarLista=findElement(botonDropDownLocator1);
+			waitElement(opcionlistaLocator);
+			elegirOpcion = findElement(opcionlistaLocator);
 			moveToElementosByDos(desplegarLista,elegirOpcion);
 		}else if(isDisplayed(botonDropDownLocator2)) {
 			desplegarLista=findElement(botonDropDownLocator2);
 			click(botonDropDownLocator2);
+			waitElement(opcionlistaLocator);
+			elegirOpcion = findElement(opcionlistaLocator);
 			click(elegirOpcion);
 			//
 		}		
