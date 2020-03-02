@@ -81,7 +81,7 @@ public class EbayDetalle extends Base {
 	}
 
 	public void ordenarPor(String nombreOrden) throws InterruptedException {
-		
+		//
 		WebElement desplegarLista=null;
 		WebElement elegirOpcion=null;
 		opcionlistaLocator=By.xpath("//span[contains(text(), '"+nombreOrden+"')]");
@@ -162,6 +162,7 @@ public class EbayDetalle extends Base {
 					desplegarLista=findElement(botonDropDownLocator2);
 					click(botonDropDownLocator2);
 					click(elegirOpcion);
+					
 				}
 			} else if (modo.contains("desc")) {
 				WebElement desplegarLista=null;
