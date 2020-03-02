@@ -93,6 +93,7 @@ public class EbayDetalle extends Base {
 			desplegarLista=findElement(botonDropDownLocator2);
 			click(botonDropDownLocator2);
 			click(elegirOpcion);
+			//
 		}		
 		
 
