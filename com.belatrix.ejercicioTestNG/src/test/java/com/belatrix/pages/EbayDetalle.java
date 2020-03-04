@@ -21,12 +21,17 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.belatrix.base.Base;
 
 public class EbayDetalle extends Base {
 
-	public EbayDetalle() {
+	ExtentTest logger;
+
+	public EbayDetalle(ExtentTest logger) {
 		super();
+		this.logger=logger;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,7 +41,7 @@ public class EbayDetalle extends Base {
 	By checkboxtamanioLocator;
 	By opcionlistaLocator;
 
-	By resultadosLocator = By.xpath("//h1[@class='srp-controls__count-heading']");
+	By resultadosbusquedaLocator = By.xpath("//h1[@class='srp-controls__count-heading']");
 	By spanresultadoLocator = By.tagName("span");
 	//By botonDropDownLocator = By.xpath("//button[@type='button' and @aria-controls='w9']");
 	//By botonDropDownLocator = By.id("w23-button-w0");
@@ -47,7 +52,7 @@ public class EbayDetalle extends Base {
 	By precioProductoLocator = (By.xpath("//span[@class='s-item__price']"));
 
 
-	public void seleccionarMarca() throws InterruptedException {
+	public void seleccionarMarcaAzar() throws InterruptedException {
 
 		/*
 		 * Seleccionamos marca al azar List<WebElement> options =
@@ -59,90 +64,96 @@ public class EbayDetalle extends Base {
 
 	public void seleccionarMarca(String nombreMarca) throws InterruptedException {
 		checkboxmarcaLocator=By.xpath("//input[@type='checkbox' and @aria-label='"+nombreMarca+"']");
-		waitElement(checkboxmarcaLocator);
-		click(checkboxmarcaLocator);
-
-
+		if(waitPresenceOfElementLocated(getDriver(), "10", checkboxmarcaLocator)) {
+			click(checkboxmarcaLocator);
+			logger.log(Status.PASS, "Se seleccionó la marca: "+nombreMarca);
+		}
+		
 	}
 
 	public void seleccionarTamaño(String tamaño) throws InterruptedException {
 		checkboxtamanioLocator=By.xpath("//input[@type='checkbox' and @aria-label='"+tamaño+"']");
-		waitElement(checkboxtamanioLocator);
-		click(checkboxtamanioLocator);
+		if(waitPresenceOfElementLocated(getDriver(), "10", checkboxmarcaLocator)) {
+			click(checkboxtamanioLocator);
+			logger.log(Status.PASS, "Se seleccionó el tamaño: "+tamaño);
+		}
+		
 
 	}
 
 	public void obtenernumeroResultados() throws InterruptedException {
-		waitElement(resultadosLocator);
-		WebElement listaresutado = findElement(resultadosLocator);
-		List<WebElement> resultado = findElements(listaresutado, spanresultadoLocator);
-		String textoresultado = getText(resultado.get(0));
-		System.out.println("La cantidad de resultados es: " + textoresultado);
-	
+		
+		if(waitPresenceOfElementLocated(getDriver(), "5", resultadosbusquedaLocator)) {
+			WebElement listaresutado = findElement(resultadosbusquedaLocator);
+			List<WebElement> resultado = findElements(listaresutado, spanresultadoLocator);
+			String textoresultado = getText(resultado.get(0));
+			imprimirTexto("La cantidad de resultados es: " + textoresultado);
+			imprimirSeparador();
+		}
+
 
 	}
 
 	public void ordenarPor(String nombreOrden) throws InterruptedException {
-		//
 		WebElement desplegarLista=null;
 		WebElement elegirOpcion=null;
 		opcionlistaLocator=By.xpath("//span[contains(text(), '"+nombreOrden+"')]");
 		
-		
-		if(isDisplayed(botonDropDownLocator1))  {
+		if(waitPresenceOfElementLocated(getDriver(), "5", botonDropDownLocator1)) {
 			desplegarLista=findElement(botonDropDownLocator1);
-			waitElement(opcionlistaLocator);
-			elegirOpcion = findElement(opcionlistaLocator);
-			moveToElementosByDos(desplegarLista,elegirOpcion);
-		}else if(isDisplayed(botonDropDownLocator2)) {
+			if(waitPresenceOfElementLocated(getDriver(), "10", opcionlistaLocator)) {
+				elegirOpcion = findElement(opcionlistaLocator);
+				moveToElementosByDos(desplegarLista,elegirOpcion);
+			}
+		}else if(waitPresenceOfElementLocated(getDriver(), "5", botonDropDownLocator2)) {
 			desplegarLista=findElement(botonDropDownLocator2);
 			click(botonDropDownLocator2);
-			waitElement(opcionlistaLocator);
-			elegirOpcion = findElement(opcionlistaLocator);
-			click(elegirOpcion);
-			//
-		}		
+			if(waitPresenceOfElementLocated(getDriver(), "10", opcionlistaLocator)) {
+				elegirOpcion = findElement(opcionlistaLocator);
+				click(elegirOpcion);
+			}
+
+		}	
+		
 		
 
 	}
-	public void ConfirmarResultados(String numero) {
-		waitElement(cantidadresultLocator);
-		List<WebElement> nombres = findElements(cantidadresultLocator);
-		int numeroInt=Integer.parseInt(numero);
-		System.out.println(""+nombres.size());
-		Assert.assertTrue(nombres.size()>numeroInt,"NO SE EJECUTO CORRECTAMENTE");
+	public void confirmarCantidadProductos(String numero) {
+		/*
+		 * waitElement(cantidadresultLocator); List<WebElement> nombres =
+		 * findElements(cantidadresultLocator); int numeroInt=Integer.parseInt(numero);
+		 * System.out.println(""+nombres.size());
+		 * Assert.assertTrue(nombres.size()>numeroInt,"NO SE EJECUTO CORRECTAMENTE");
+		 */
+		
+		if(waitNumberOfElementsToBeMoreThan(getDriver(), "10", cantidadresultLocator,numero)) {
+			imprimirTexto("Tiene mas de "+numero+" elemento(s)");
+			imprimirSeparador();
+		}
+		
 		//WebDriverWait wait=new WebDriverWait(driver,10);
 		//WebElement cantidadPasajeross=wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(cantidadresultLocator,2));
 		//List<WebElement> cantidadPasajeros=wait.until(ExpectedConditions.numberOfE(cantidadresultLocator, 3));
 		
 	}
 
-	public String tomarResultados(String numero) throws InterruptedException {
-
-		List<WebElement> nombres = findElements(nombreProductoLocator);
-		List<WebElement> precios = findElements(precioProductoLocator);
-
-		String[] arrNombres;
-		String[] arrPrecios;
-		int contador = 0;
-		int numeroInt = Integer.parseInt(numero);
-		arrNombres = new String[numeroInt];
-		arrPrecios = new String[numeroInt];
-		for (int i = 0; i < nombres.size(); i++) {
-			if (i < numeroInt) {
-				arrNombres[i] = getText(nombres.get(i));
-				arrPrecios[i] = getText(precios.get(i));
-				System.out.println("NOMBRE: " + getText(nombres.get(i)) + " , PRECIO: " + getText(precios.get(i)));
-				contador++;
-			}
+	public void imprimirCantidadProductos(String numero) throws InterruptedException {
+		if(waitPresenceOfElementLocated(getDriver(), "10", cantidadresultLocator)) {
+			List<WebElement> nombres = findElements(nombreProductoLocator);
+			List<WebElement> precios = findElements(precioProductoLocator);
+			int numeroInt = Integer.parseInt(numero);
+			for (int i = 0; i < nombres.size(); i++) {
+				if (i < numeroInt) {
+				
+					System.out.println("NOMBRE: " + getText(nombres.get(i)) + " , PRECIO: " + getText(precios.get(i)));
+				
+				}
+			}			
+			imprimirSeparador();
 		}
-		
-		System.out.println("--------------------------------------------------------------------------------------");
-		String contadorString = String.valueOf(contador);
-		return contadorString;
 	}
 
-	public void imprimirResultados( String concepto, String modo) throws InterruptedException 
+	public void imprimirEnOrdenPrecioOProducto( String concepto, String modo) throws InterruptedException 
 	{
 		String[] arrNombres = null;
 		String[] arrPrecios = null;
@@ -159,8 +170,6 @@ public class EbayDetalle extends Base {
 			
 					arrNombres[i] = getText(nombres.get(i));
 					arrPrecios[i] = getText(precios.get(i));
-			
-
 			}
 			if (modo.contains("asc")) {
 				Arrays.sort(arrNombres);
@@ -174,10 +183,10 @@ public class EbayDetalle extends Base {
 				WebElement elegirOpcion=null;
 				opcionlistaLocator=By.xpath("//span[contains(text(), 'bajo primero')]");
 				elegirOpcion = findElement(opcionlistaLocator);
-				if(isDisplayed(botonDropDownLocator1))  {
+				if(waitPresenceOfElementLocated(getDriver(), "5", botonDropDownLocator1)) {
 					desplegarLista=findElement(botonDropDownLocator1);
 					moveToElementosByDos(desplegarLista,elegirOpcion);
-				}else if(isDisplayed(botonDropDownLocator2)) {
+				}else if(waitPresenceOfElementLocated(getDriver(), "5", botonDropDownLocator2)) {
 					desplegarLista=findElement(botonDropDownLocator2);
 					click(botonDropDownLocator2);
 					click(elegirOpcion);
@@ -216,8 +225,8 @@ public class EbayDetalle extends Base {
 		for (int i = 0; i < arrNombres.length; i++) {
 			System.out.println(arrNombres[i]);
 		}
-		System.out.println("--------------------------------------------------------------------------------------");
-		Thread.sleep(4000);
+		imprimirSeparador();
+		Thread.sleep(6000);
 	}
 
 

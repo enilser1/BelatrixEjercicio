@@ -18,52 +18,27 @@ import java.io.File;
 
 import org.testng.annotations.AfterClass;
 
-public class Test01 extends Base{
-	EbayPrincipal ebayPrincipal;
-	EbayDetalle ebayDetalle;
-	
-	ExtentReports report;
-	ExtentTest logger;
-	
-	@BeforeSuite
-	public void setUpSuite() {
-		//ExtentHtmlReporter extent=new ExtentHtmlReporter(new File(System.getProperty("user.dir")+"/Reports/Belatrix.html"));
-		ExtentHtmlReporter extent=new ExtentHtmlReporter("./Reports/BelatrixReport.html");
-		
-		report = new ExtentReports();
-		report.attachReporter(extent);
-	}
-	
-	@BeforeClass
-	  public void beforeClass() {
-		
-		ebayPrincipal = new EbayPrincipal();
-		ebayDetalle = new EbayDetalle();
-		ebayPrincipal.pagina("https://www.ebay.com/");
-		
-		
-		
-		
-	  }
+public class Test01 extends Hook{
 	
 	
-	@Test(dataProvider = "authenticationData")
+	
+	@Test(dataProvider = "authenticationData",description="CASO DE PRUEBA BELATRIX",enabled = true)
   public void test(String objeto,String marca,String tamanio,String cantidad) throws InterruptedException {
 
 		
-    	logger=report.createTest("Ejercicio Belatrix");
-    	logger.info("Empieza la aplicacion");
+    	//logger=report.createTest("Ejercicio Belatrix");
+    	
 			
-    	  logger.log(Status.INFO, "Ingresamos el producto");
+    	  
     	  ebayPrincipal.ingresarProducto(objeto);
     	  
-    	  logger.log(Status.INFO, "Presionamos el boton buscar");
+    	  
 		  ebayPrincipal.buscarProducto(); 
 		  
-		  logger.log(Status.INFO, "Seleccionamos la marca");
+		 
 		  ebayDetalle.seleccionarMarca(marca);
 		  
-		  logger.log(Status.INFO, "Seleccionamos el tamanio");
+		  
 		  ebayDetalle.seleccionarTamaño(tamanio);
 		  
 		  logger.log(Status.INFO, "Imprimimos resultados en consola");
@@ -73,20 +48,19 @@ public class Test01 extends Base{
 		  ebayDetalle.ordenarPor("bajo primero");
 		  
 		  logger.log(Status.INFO, "Ingresamos la cantidad de resultados que queremos");
-		  ebayDetalle.ConfirmarResultados("5");
-		  if(cantidad.equals(ebayDetalle.tomarResultados(cantidad))) {
+		  ebayDetalle.confirmarCantidadProductos(cantidad);
+		  ebayDetalle.imprimirCantidadProductos(cantidad);
 		  logger.pass("Paso con exito"); 
 		  logger.log(Status.PASS, "Paso con exito 2");
-		  }else {
-			  logger.log(Status.FAIL, "Fallo");
-		  }
+		  logger.log(Status.FAIL, "Fallo");
+		  
 		  
 		  //Assert.assertEquals(resultado, ebayDetalle.tomarResultados(resultado));
 		  logger.log(Status.INFO, "Imprimimos nombre de producto de manera ascendente");
-		  ebayDetalle.imprimirResultados("nombre", "asc");
+		  ebayDetalle.imprimirEnOrdenPrecioOProducto("nombre", "asc");
 		  
 		  logger.log(Status.INFO, "Imprimimos nombre de producto por sus precios en forma descendente");
-		  ebayDetalle.imprimirResultados("precio", "desc");
+		  ebayDetalle.imprimirEnOrdenPrecioOProducto("precio", "desc");
 		 
   }
   
@@ -99,10 +73,7 @@ public class Test01 extends Base{
       return (data);
 	 
   }
-  @AfterClass
-  public void afterClass() {
-	  report.flush();
-	  //cerrarNavegador();
-  }
+  
+  
 
 }

@@ -15,31 +15,41 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Base {
+import com.belatrix.metodos.MetodosJava;
+import com.belatrix.metodos.MetodosWaits;
+
+public class Base extends MetodosWaits{
 
 	public static WebDriver driver;
 	
 	public Base() {
-		String driverByOS="";
 	
+		String path="";
 		
 		if (driver == null) {
 			
 			//if(System.getProperty("os.name").equals("Windows 10")) {
-				driverByOS="./src/test/resources/chromedriver/chromedriver.exe";
+			path="./src/test/resources/chromedriver/chromedriver.exe";
 			/*
 			 * }else { driverByOS="./src/test/resources/otracarpeta/chromedriverLinux.exe";
 			 * }
 			 * 
 			 */
 			
-			 System.setProperty("webdriver.chrome.driver", driverByOS); 
+			 //System.setProperty("webdriver.chrome.driver", driverByOS); 
 			 /* ChromeOptions chromeOptions = new ChromeOptions();
 			 * chromeOptions.addArguments("--headless"); 
 			 * driver = new ChromeDriver(chromeOptions);
 			 */
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
+			 
+			 	final String binaryPath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+				
+				System.setProperty("webdriver.chrome.driver", path);
+				ChromeOptions chromeOpt= new ChromeOptions();
+				chromeOpt.setBinary(binaryPath);
+				
+				driver = new ChromeDriver (chromeOpt);
+				driver.manage().window().maximize();
 
         }
 	}
@@ -55,7 +65,7 @@ public class Base {
 	}
 	
 	public void pagina(String url) {
-		driver.get(url);
+		driver.navigate().to(url);
 	}
 	
 	public void capturarPantalla(String nombre) throws IOException, InterruptedException {
@@ -127,8 +137,22 @@ public class Base {
 		return driver.findElement(localizador).getText();
 	}
 	
+	
+	
+	public WebDriver getDriver() {
+		return driver;
+	}
+	
 	public void cerrarNavegador() {
 		driver.quit();
+	}
+	
+	public void imprimirTexto(String texto){
+		System.out.println(texto);
+	}
+	
+	public void imprimirSeparador(){
+		System.out.println("--------------------------------------------------------------------------------------");
 	}
 
 }
