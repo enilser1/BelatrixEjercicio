@@ -6,9 +6,9 @@
       <class name="com.belatrix.tests.Test01">
         <methods>
           <include name="test" invocation-numbers="0"/>
-          <include name="beforeClass"/>
-          <include name="afterClass"/>
+          <include name="beforeMethod"/>
           <include name="setUpSuite"/>
+          <include name="afterMethod"/>
         </methods>
       </class> <!-- com.belatrix.tests.Test01 -->
     </classes>

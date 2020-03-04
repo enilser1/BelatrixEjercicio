@@ -15,7 +15,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.belatrix.metodos.MetodosJava;
 import com.belatrix.metodos.MetodosWaits;
 
 public class Base extends MetodosWaits {
@@ -81,7 +80,7 @@ public class Base extends MetodosWaits {
 	public void waitElement(By localizador) {
 		WebDriverWait ewait = new WebDriverWait(driver, 10);
 		ewait.until(ExpectedConditions.presenceOfElementLocated(localizador));
-
+//
 	}
 
 	public Boolean isDisplayed(By localizador) {
