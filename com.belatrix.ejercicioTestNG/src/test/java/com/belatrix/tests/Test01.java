@@ -73,6 +73,7 @@ public class Test01 extends Base{
 		  ebayDetalle.ordenarPor("bajo primero");
 		  
 		  logger.log(Status.INFO, "Ingresamos la cantidad de resultados que queremos");
+		  ebayDetalle.ConfirmarResultados("5");
 		  if(cantidad.equals(ebayDetalle.tomarResultados(cantidad))) {
 		  logger.pass("Paso con exito"); 
 		  logger.log(Status.PASS, "Paso con exito 2");
@@ -101,7 +102,7 @@ public class Test01 extends Base{
   @AfterClass
   public void afterClass() {
 	  report.flush();
-	  cerrarNavegador();
+	  //cerrarNavegador();
   }
 
 }

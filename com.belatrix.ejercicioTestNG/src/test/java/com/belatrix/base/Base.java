@@ -32,11 +32,13 @@ public class Base {
 			 * }
 			 * 
 			 */
-			System.setProperty("webdriver.chrome.driver", driverByOS);
-			ChromeOptions chromeOptions = new ChromeOptions();
-			chromeOptions.addArguments("--headless");
-			driver = new ChromeDriver(chromeOptions);
-			//driver = new ChromeDriver();
+			
+			 System.setProperty("webdriver.chrome.driver", driverByOS); 
+			 /* ChromeOptions chromeOptions = new ChromeOptions();
+			 * chromeOptions.addArguments("--headless"); 
+			 * driver = new ChromeDriver(chromeOptions);
+			 */
+			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 
         }
@@ -66,9 +68,10 @@ public class Base {
 	}
 	
 	public void moveToElementosByDos(WebElement elemento1,WebElement elemento2) throws InterruptedException{
-		Actions action = new Actions(driver); 
+		Actions action = new Actions(driver);
 		action.moveToElement(elemento1).moveToElement(elemento2).click().build().perform();
 		
+	
 		
 	}
 
@@ -81,6 +84,7 @@ public class Base {
 	public void waitElement(By localizador) {
 		WebDriverWait ewait=new WebDriverWait(driver,10);
 		ewait.until(ExpectedConditions.presenceOfElementLocated(localizador));
+		
 	}
 	
 	
@@ -97,7 +101,8 @@ public class Base {
 		driver.findElement(localizador).click();
 	}
 	
-	public void click(WebElement elemento) {		
+	public void click(WebElement elemento) {
+		
 		elemento.click();
 	}
 	

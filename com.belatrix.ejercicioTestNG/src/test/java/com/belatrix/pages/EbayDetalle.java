@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.belatrix.base.Base;
 
@@ -41,6 +42,7 @@ public class EbayDetalle extends Base {
 	//By botonDropDownLocator = By.id("w23-button-w0");
 	By botonDropDownLocator1 = By.xpath("//div[@class='srp-controls--selected-value']");
 	By botonDropDownLocator2 = By.xpath("//button[@id='w23-button']");
+	By cantidadresultLocator=By.xpath("//li[contains(@id,'srp-river-results-listing')]");
 	By nombreProductoLocator = (By.xpath("//h3[@class='s-item__title']"));
 	By precioProductoLocator = (By.xpath("//span[@class='s-item__price']"));
 
@@ -102,6 +104,17 @@ public class EbayDetalle extends Base {
 		}		
 		
 
+	}
+	public void ConfirmarResultados(String numero) {
+		waitElement(cantidadresultLocator);
+		List<WebElement> nombres = findElements(cantidadresultLocator);
+		int numeroInt=Integer.parseInt(numero);
+		System.out.println(""+nombres.size());
+		Assert.assertTrue(nombres.size()>numeroInt,"NO SE EJECUTO CORRECTAMENTE");
+		//WebDriverWait wait=new WebDriverWait(driver,10);
+		//WebElement cantidadPasajeross=wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(cantidadresultLocator,2));
+		//List<WebElement> cantidadPasajeros=wait.until(ExpectedConditions.numberOfE(cantidadresultLocator, 3));
+		
 	}
 
 	public String tomarResultados(String numero) throws InterruptedException {
