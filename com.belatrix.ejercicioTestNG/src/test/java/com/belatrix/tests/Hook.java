@@ -1,7 +1,9 @@
 package com.belatrix.tests;
 
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -11,39 +13,35 @@ import com.belatrix.base.Base;
 import com.belatrix.pages.EbayDetalle;
 import com.belatrix.pages.EbayPrincipal;
 
-public class Hook extends Base{
+public class Hook extends Base {
 	EbayPrincipal ebayPrincipal;
 	EbayDetalle ebayDetalle;
-	
+
 	ExtentReports report;
 	ExtentTest logger;
-	
+
 	@BeforeSuite
 	public void setUpSuite() {
-		//ExtentHtmlReporter extent=new ExtentHtmlReporter(new File(System.getProperty("user.dir")+"/Reports/Belatrix.html"));
-		ExtentHtmlReporter extent=new ExtentHtmlReporter("./Reports/BelatrixReport.html");
-		
+
+		ExtentHtmlReporter extent = new ExtentHtmlReporter("./Reports/BelatrixReport.html");
+
 		report = new ExtentReports();
 		report.attachReporter(extent);
-		logger=report.createTest("Ejercicio Belatrix");
+
 	}
-	
-	@BeforeClass
-	  public void beforeClass() {
-		
+
+	@BeforeMethod
+	public void beforeMethod() {
+		logger = report.createTest("Ejercicio Belatrix");
 		ebayPrincipal = new EbayPrincipal(logger);
 		ebayDetalle = new EbayDetalle(logger);
 		ebayPrincipal.pagina("http://www.ebay.com/");
-		
-		
-		
-		
-	  }
-	
-	@AfterClass
-	  public void afterClass() {
-		  report.flush();
-		  //cerrarNavegador();
-	  }
+	}
+
+	@AfterMethod
+	public void afterMethod() {
+		report.flush();
+		cerrarNavegador();
+	}
 
 }

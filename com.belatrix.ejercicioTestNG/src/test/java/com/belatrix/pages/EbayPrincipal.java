@@ -9,43 +9,52 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.belatrix.base.Base;
+import com.belatrix.tests.Hook;
 
-public class EbayPrincipal extends Base {
-	
+public class EbayPrincipal extends Hook {
+
 	ExtentTest logger;
 
 	public EbayPrincipal(ExtentTest logger) {
 		super();
-		this.logger=logger;
+		this.logger = logger;
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	By cajaBusqueda = By.id("gh-ac");
 	By botonBusqueda = By.id("gh-btn");
 
 	public void ingresarProducto(String nombreproducto) throws InterruptedException {
-		waitElement(cajaBusqueda);
-		if (isDisplayed(cajaBusqueda)) {
-			/* Ingresamos el nombre del producto en la caja de texto */
+
+		if (waitPresenceOfElementLocated(getDriver(), "10", cajaBusqueda)) {
+
 			sendKeys(nombreproducto, cajaBusqueda);
-			logger.log(Status.PASS, "Se encontró: "+nombreproducto);
+			logger.log(Status.PASS, "Se encontro: " + nombreproducto);
+		} else {
+			logger.log(Status.FAIL, "No pudo ingresar " + nombreproducto);
+			Assert.fail("No pudo ingresar " + nombreproducto);
 		}
 	}
 
 	public void elegirCategoria(String nombreCategoria) throws InterruptedException {
-		/* Elegimos la categoria */
+		/* Ejm: Elegimos la categoria */
 	}
 
 	public void buscarProducto() throws InterruptedException {
-		waitElement(botonBusqueda);
-		if (isDisplayed(botonBusqueda)) {
-			/* clic en el boton para buscar el producto */
+
+		if (waitPresenceOfElementLocated(getDriver(), "10", botonBusqueda)) {
+
 			click(botonBusqueda);
-			
+			logger.log(Status.PASS, "Se dio clic en boton para buscar");
+
+		} else {
+			logger.log(Status.FAIL, "No pudo dar clic en boton para buscar");
+			Assert.fail("No pudo dar clic en boton para buscar");
 		}
 	}
 

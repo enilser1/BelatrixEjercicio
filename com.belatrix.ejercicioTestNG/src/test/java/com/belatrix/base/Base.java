@@ -18,140 +18,122 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.belatrix.metodos.MetodosJava;
 import com.belatrix.metodos.MetodosWaits;
 
-public class Base extends MetodosWaits{
+public class Base extends MetodosWaits {
 
 	public static WebDriver driver;
-	
-	public Base() {
-	
-		String path="";
-		
-		if (driver == null) {
-			
-			//if(System.getProperty("os.name").equals("Windows 10")) {
-			path="./src/test/resources/chromedriver/chromedriver.exe";
-			/*
-			 * }else { driverByOS="./src/test/resources/otracarpeta/chromedriverLinux.exe";
-			 * }
-			 * 
-			 */
-			
-			 //System.setProperty("webdriver.chrome.driver", driverByOS); 
-			 /* ChromeOptions chromeOptions = new ChromeOptions();
-			 * chromeOptions.addArguments("--headless"); 
-			 * driver = new ChromeDriver(chromeOptions);
-			 */
-			 
-			 	final String binaryPath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
-				
-				System.setProperty("webdriver.chrome.driver", path);
-				ChromeOptions chromeOpt= new ChromeOptions();
-				chromeOpt.setBinary(binaryPath);
-				
-				driver = new ChromeDriver (chromeOpt);
-				driver.manage().window().maximize();
 
-        }
+	public Base() {
+
+		String pathDriver = "";
+
+		if (driver == null) {
+
+			// if(System.getProperty("os.name").equals("Windows 10")) {
+			pathDriver = "./src/test/resources/chromedriver/chromedriver.exe";
+
+			// }else { driverByOS="./src/test/resources/otracarpeta/chromedriverLinux.exe";
+			// }
+
+			System.setProperty("webdriver.chrome.driver", pathDriver);
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--headless");
+			driver = new ChromeDriver(chromeOptions);
+
+			driver.manage().window().maximize();
+
+		}
 	}
-	
+
 	public WebDriver chromeDriverConnection() {
 		System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe");
 		if (driver == null) {
 			driver = new ChromeDriver();
 
-        }
-		
+		}
+
 		return driver;
 	}
-	
+
 	public void pagina(String url) {
 		driver.navigate().to(url);
 	}
-	
-	public void capturarPantalla(String nombre) throws IOException, InterruptedException {
-		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
-		//org.openqa.selenium.io.FileHandler.copy(from, to);
-		org.openqa.selenium.io.FileHandler.copy(scrFile, new File("./src/test/resources/screenshot/"+nombre+".jpg"));
+	public void capturarPantalla(String nombre) throws IOException, InterruptedException {
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+		// org.openqa.selenium.io.FileHandler.copy(from, to);
+		org.openqa.selenium.io.FileHandler.copy(scrFile,
+				new File("./src/test/resources/screenshot/" + nombre + ".jpg"));
 		Thread.sleep(2000);
-		
+
 	}
-	
-	public void moveToElementosByDos(WebElement elemento1,WebElement elemento2) throws InterruptedException{
+
+	public void moverDesdeAcaHastaAlla(WebElement elemento1, WebElement elemento2) throws InterruptedException {
 		Actions action = new Actions(driver);
 		action.moveToElement(elemento1).moveToElement(elemento2).click().build().perform();
-		
-	
-		
+
 	}
 
 	public WebElement findElement(By localizador) {
 		return driver.findElement(localizador);
 	}
-	
 
-	
 	public void waitElement(By localizador) {
-		WebDriverWait ewait=new WebDriverWait(driver,10);
+		WebDriverWait ewait = new WebDriverWait(driver, 10);
 		ewait.until(ExpectedConditions.presenceOfElementLocated(localizador));
-		
+
 	}
-	
-	
-	
+
 	public Boolean isDisplayed(By localizador) {
 		try {
 			return driver.findElement(localizador).isDisplayed();
-		}catch(org.openqa.selenium.NoSuchElementException e) {
+		} catch (org.openqa.selenium.NoSuchElementException e) {
 			return false;
 		}
 	}
-	
+
 	public void click(By localizador) {
 		driver.findElement(localizador).click();
 	}
-	
+
 	public void click(WebElement elemento) {
-		
+
 		elemento.click();
 	}
-	
+
 	public void sendKeys(String textoEntrada, By localizador) {
 		driver.findElement(localizador).sendKeys(textoEntrada);
 	}
-	
-	
-	public List<WebElement> findElements(By localizador){
+
+	public List<WebElement> findElements(By localizador) {
 		return driver.findElements(localizador);
 	}
-	
-	public List<WebElement> findElements(WebElement elemento,By localizador){
+
+	public List<WebElement> findElements(WebElement elemento, By localizador) {
 		return elemento.findElements(localizador);
 	}
-	
+
 	public String getText(WebElement elemento) {
 		return elemento.getText();
 	}
-	
+
 	public String getText(By localizador) {
 		return driver.findElement(localizador).getText();
 	}
-	
-	
-	
+
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
+
 	public void cerrarNavegador() {
 		driver.quit();
 	}
-	
-	public void imprimirTexto(String texto){
+
+	public void imprimirTexto(String texto) {
 		System.out.println(texto);
 	}
-	
-	public void imprimirSeparador(){
+
+	public void imprimirSeparador() {
 		System.out.println("--------------------------------------------------------------------------------------");
 	}
 
